@@ -1,0 +1,1904 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     65113,       1895]
+NotebookOptionsPosition[     64495,       1871]
+NotebookOutlinePosition[     64839,       1886]
+CellTagsIndexPosition[     64796,       1883]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "M", ",", "Z", ",", "\[Lambda]", ",", "x", ",", "i", ",", 
+   "\[CapitalDelta]x", ",", "\[CapitalDelta]t", ",", "t", ",", "X", ",", "Y", 
+   ",", "h", ",", "k", ",", "a", ",", "b", ",", "c"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", "=", 
+   RowBox[{"-", "5."}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]", "=", "2."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]x", "=", ".2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]t", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Lambda]", "=", 
+   FractionBox[
+    RowBox[{"\[Alpha]", "*", "\[CapitalDelta]t"}], 
+    SuperscriptBox["\[CapitalDelta]x", "2"]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"i", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{"x", "<", "5."}], ",", "\[IndentingNewLine]", "\t", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"x", "+", "\[CapitalDelta]x"}]}], ";", "\[IndentingNewLine]", 
+    "\t", 
+    RowBox[{"i", "++"}]}]}], "\[IndentingNewLine]", "\t", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"M", "=", 
+   RowBox[{"SparseArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"1", "-", 
+         RowBox[{"2", "*", "\[Lambda]"}]}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2"}], "}"}], "]"}], "\[Rule]", "\[Lambda]"}], 
+       ",", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "1"}], "}"}], "]"}], "\[Rule]", "\[Lambda]"}]}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "i"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "2"}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", "i"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", 
+      RowBox[{"i", "-", "1"}]}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ConstantArray", "[", 
+    RowBox[{"20", ",", "i"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["Temp", "0"], ",", 
+     RowBox[{"1", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["Temp", "0"], ",", 
+     RowBox[{"i", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"t", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"t", "\[LessEqual]", 
+     FractionBox["20", "\[CapitalDelta]t"]}], ",", "\[IndentingNewLine]", 
+    "\t\t", 
+    RowBox[{
+     RowBox[{"t", "++"}], ";", "\[IndentingNewLine]", "\t\t", 
+     RowBox[{
+      SubscriptBox["Temp", "t"], "=", 
+      RowBox[{"M", ".", 
+       SubscriptBox["Temp", 
+        RowBox[{"t", "-", "1"}]]}]}], ";"}]}], "\[IndentingNewLine]", "\t", 
+   "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"h_", ",", "k_"}], "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"h", ",", "k"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["FE", "500"], "=", 
+   SubscriptBox["Temp", "500"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "500"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "1000"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "1500"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", 
+    RowBox[{"PlotMarkers", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<\[Alpha]\>\"", ",", "\"\<\[Beta]\>\"", ",", "\"\<\[Gamma]\>\""}], 
+      "}"}]}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "20"}], "}"}]}], ",", 
+    RowBox[{
+    "PlotLabel", "\[Rule]", 
+     "\"\<Forward Euler cross section of 1D Heat Eq at t step \[Alpha]=5, \
+\[Beta]=10, \[Gamma]=15\>\""}]}], "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Start", " ", "Backward", " ", "Euler"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "M", ",", "Z", ",", "\[Lambda]", ",", "x", ",", "i", ",", 
+   "\[CapitalDelta]x", ",", "\[CapitalDelta]t", ",", "t", ",", "X", ",", "Y", 
+   ",", "h", ",", "k", ",", "a", ",", "b", ",", "c", ",", "f"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", "=", 
+   RowBox[{"-", "5."}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]", "=", "2."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]x", "=", ".2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]t", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Lambda]", "=", 
+   FractionBox[
+    RowBox[{"\[Alpha]", "*", "\[CapitalDelta]t"}], 
+    SuperscriptBox["\[CapitalDelta]x", "2"]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"i", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{"x", "<", "5."}], ",", "\[IndentingNewLine]", "\t", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"x", "+", "\[CapitalDelta]x"}]}], ";", "\[IndentingNewLine]", 
+    "\t", 
+    RowBox[{"i", "++"}]}]}], "\[IndentingNewLine]", "\t", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"M", "=", 
+   RowBox[{"SparseArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"1", "+", 
+         RowBox[{"2", "*", "\[Lambda]"}]}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"-", "\[Lambda]"}]}], ",", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"-", "\[Lambda]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "i"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "2"}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", "i"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"M", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", 
+      RowBox[{"i", "-", "1"}]}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ConstantArray", "[", 
+    RowBox[{"20", ",", "i"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["Temp", "0"], ",", 
+     RowBox[{"1", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["Temp", "0"], ",", 
+     RowBox[{"i", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"t", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"t", "\[LessEqual]", 
+     FractionBox["20", "\[CapitalDelta]t"]}], ",", "\[IndentingNewLine]", 
+    "\t\t", 
+    RowBox[{
+     RowBox[{"t", "++"}], ";", "\[IndentingNewLine]", "\t\t", 
+     RowBox[{
+      SubscriptBox["Temp", "t"], "=", 
+      RowBox[{"LinearSolve", "[", 
+       RowBox[{"M", ",", 
+        SubscriptBox["Temp", 
+         RowBox[{"t", "-", "1"}]]}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
+   "\t", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"h_", ",", "k_"}], "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"h", ",", "k"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["BE", "500"], "=", 
+   SubscriptBox["Temp", "500"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "500"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "1000"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "1500"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ListPlot", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", 
+    RowBox[{"PlotMarkers", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<\[Alpha]\>\"", ",", "\"\<\[Beta]\>\"", ",", "\"\<\[Gamma]\>\""}], 
+      "}"}]}], ",", 
+    RowBox[{"PlotRange", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "20"}], "}"}]}], ",", 
+    RowBox[{
+    "PlotLabel", "\[Rule]", 
+     "\"\<Backward Euler cross section for 1D Heat Eq at t step \[Alpha]=5, \
+\[Beta]=10, \[Gamma]=15\>\""}]}], "]"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Start", " ", "Crank"}], "-", "Nicolson"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "M", ",", "Z", ",", "\[Lambda]", ",", "x", ",", "i", ",", 
+   "\[CapitalDelta]x", ",", "\[CapitalDelta]t", ",", "t", ",", "X", ",", "Y", 
+   ",", "h", ",", "k", ",", "a", ",", "b", ",", "c", ",", "f", ",", "B", ",", 
+   "F"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", "=", 
+   RowBox[{"-", "5."}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]", "=", "2."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]x", "=", ".2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]t", "=", ".01"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Lambda]", "=", 
+   FractionBox[
+    RowBox[{"\[Alpha]", "*", "\[CapitalDelta]t"}], 
+    SuperscriptBox["\[CapitalDelta]x", "2"]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"i", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{"x", "<", "5."}], ",", "\[IndentingNewLine]", "\t", 
+   RowBox[{
+    RowBox[{"x", "=", 
+     RowBox[{"x", "+", "\[CapitalDelta]x"}]}], ";", "\[IndentingNewLine]", 
+    "\t", 
+    RowBox[{"i", "++"}]}]}], "\[IndentingNewLine]", "\t", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"F", "=", 
+   RowBox[{"SparseArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"2", "-", 
+         RowBox[{"2", "*", "\[Lambda]"}]}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2"}], "}"}], "]"}], "\[Rule]", "\[Lambda]"}], 
+       ",", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "1"}], "}"}], "]"}], "\[Rule]", "\[Lambda]"}]}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "i"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "2"}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", "i"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", 
+      RowBox[{"i", "-", "1"}]}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ConstantArray", "[", 
+    RowBox[{"20", ",", "i"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["Temp", "0"], ",", 
+     RowBox[{"1", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["Temp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["Temp", "0"], ",", 
+     RowBox[{"i", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{"SparseArray", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"2", "+", 
+         RowBox[{"2", "*", "\[Lambda]"}]}]}], ",", " ", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"1", ",", "2"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"-", "\[Lambda]"}]}], ",", 
+       RowBox[{
+        RowBox[{"Band", "[", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "1"}], "}"}], "]"}], "\[Rule]", 
+        RowBox[{"-", "\[Lambda]"}]}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "i"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"B", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "1"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"B", "[", 
+    RowBox[{"[", 
+     RowBox[{"1", ",", "2"}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"B", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", "i"}], "]"}], "]"}], "=", "1."}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"B", "[", 
+    RowBox[{"[", 
+     RowBox[{"i", ",", 
+      RowBox[{"i", "-", "1"}]}], "]"}], "]"}], "=", "0"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["BTemp", "0"], "=", 
+   RowBox[{"ConstantArray", "[", 
+    RowBox[{"20", ",", "i"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["BTemp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["BTemp", "0"], ",", 
+     RowBox[{"1", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["BTemp", "0"], "=", 
+   RowBox[{"ReplacePart", "[", 
+    RowBox[{
+     SubscriptBox["BTemp", "0"], ",", 
+     RowBox[{"i", "\[Rule]", "0"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"X", "=", 
+    RowBox[{"F", ".", 
+     SubscriptBox["Temp", "0"]}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"LinearSolve", "[", 
+    RowBox[{"B", ",", "X"}], "]"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"t", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"t", "\[LessEqual]", 
+     FractionBox["20", "\[CapitalDelta]t"]}], ",", "\[IndentingNewLine]", 
+    "\t\t", 
+    RowBox[{
+     RowBox[{"t", "++"}], ";", "\[IndentingNewLine]", "\t\t", 
+     RowBox[{"V", "=", 
+      RowBox[{"F", ".", 
+       SubscriptBox["Temp", 
+        RowBox[{"t", "-", "1"}]]}]}], ";", "\[IndentingNewLine]", "\t\t", 
+     RowBox[{
+      SubscriptBox["Temp", "t"], "=", 
+      RowBox[{"LinearSolve", "[", 
+       RowBox[{"B", ",", "V"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", "\t",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"h_", ",", "k_"}], "]"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"h", ",", "k"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["CR", "500"], "=", 
+   SubscriptBox["Temp", "500"]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"a", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "500"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "1000"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"c", "=", 
+   RowBox[{"MapThread", "[", 
+    RowBox[{"f", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{
+         RowBox[{"-", "5"}], ",", "5", ",", ".2"}], "]"}], ",", 
+       SubscriptBox["Temp", "1500"]}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ListPlot", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"a", ",", "b", ",", "c"}], "}"}], ",", 
+   RowBox[{"PlotMarkers", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<\[Alpha]\>\"", ",", "\"\<\[Beta]\>\"", ",", "\"\<\[Gamma]\>\""}], 
+     "}"}]}], ",", 
+   RowBox[{"PlotRange", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "20"}], "}"}]}], ",", 
+   RowBox[{
+   "PlotLabel", "\[Rule]", 
+    "\"\<Crank-Nicolson cross section of 1D Heat Eq at t step \[Alpha]=5, \
+\[Beta]=10, \[Gamma]=15\>\""}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<\!\(\*SubscriptBox[\(FE\), \(500\)]\)= \>\"", ",", 
+   SubscriptBox["FE", "500"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<\!\(\*SubscriptBox[\(BE\), \(500\)]\)= \>\"", ",", 
+   SubscriptBox["BE", "500"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<\!\(\*SubscriptBox[\(CR\), \(500\)]\)= \>\"", ",", 
+   SubscriptBox["CR", "500"]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  "\"\<Glance at temperatures at the \!\(\*SuperscriptBox[\(500\), \(th\)]\) \
+time step shows how Forward Euler is shows lower temperatures (overshoots), \
+Backward Euler cools slower, and Crank-Nicolson falls in between and is more \
+numerically stable.\>\"", "]"}]}], "Input",
+ CellChangeTimes->{{3.538172369609127*^9, 3.538172408780796*^9}, {
+  3.5381726864673924`*^9, 3.538172812168582*^9}, {3.538172959313998*^9, 
+  3.538173118191086*^9}, {3.5381733338114185`*^9, 3.538173398846138*^9}, {
+  3.5381734321520433`*^9, 3.538173520615103*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[GraphicsComplexBox[CompressedData["
+1:eJzt1n9M1GUcB/CD4/cROzgik/LiJE2gEE4bNuh5IAoXDBw/AhoFgaQEBAG6
+9Cpxpk0qbFjIj9BbIbDFsZogKbT7boEoEuogBBETkDtwRAd3MkCQxj2fz/Nf
+m//0333/gdv3+3yeH5/3a3u80vNiM61FIlGglUi09pc97gL+pzQ/MuFQSu6f
+zbJx8r75cROuzQQNZ4qMpKpy7XEVUv3bImf3L5M/etYeqTBk2jX4z5A1ZVWk
+gnVsh9Oej+0pG+8i7G7ark3VS6j58x5nIeNo3w4/Xyll80kEU1J9tDHUjbL6
+jsIxP1XGxSR3qOcgbLINuJDyhgfUsxMujehcVpXroJ6NsDz6zkCL4WmoJxaU
+uv6aHI0nNZertBJeizt0NSjwWagnEmKFLYs2rRtg/LLWLfd1XfeKnFaYv1/U
+Tn31c9bOH56D+ea1Njqx/TpvLxporm/Uyklirf6sF9QzaD22fvGCp40Cxk9p
+XbxaG6PTFXSr+ftxbaj6wImcagX9xvx+SLtPHlxQ0q+gxebfV7Qp4WKjRq/A
+9YnCs7oLbywpqJq9J6nwnv0eIioYH8Tqk0ioz95PEU+YH9ZHnof1bWPrJ/6w
+/r1sf8Qd9vc92z9ZhP1fZ+dDAuF8YHm0EM6P9cuKZsD5svpiGgfn38v6Q9eP
+sf6w+ezoGPQP+ksJ9JfN70hroP+snoQ6JLN8QH5oEeSH1XOhhyFfkD+6HvLH
+5pfSvyGfkF/6CeSXjXejY5BvNp+MlkH+wQfvy3952bJXla3K6uFeIlq+3twb
+dZt7CRluisoLnOBetm33O6KRTRP0Ut7Vf3vfwVmCXl6pXKnr6TIR9HL3g00f
+bXxygaCXS2+XOo8EPCToRfPmfH159COCXhomDSGup0Tcy9JPus037ay5F9VE
+yns7YsXcy8qGvqrqGhvu5UyJT2ia1pZ7CZ0/rPceteNeOnyqPS/223MvEanN
+MTGXHbiXuwULDSPHHbmXA8eCrXMinbiXkg8HpLqbTtxL9Vv58rTdEu4ltugZ
+bekFCffiUHb53d9cnLmXT4dVDTt9nXlf5rz95/oinLmXYniPXlxgPHpJhvro
+pRbmRy/fwfrQy1FYP3qZgf2hl0TYP3oZgPNBL/FwfujlHJwvenGVs/NHL6XQ
+H/TyRCPrH3ppg/6ilxvQf/QyCflAL48gP+glAfKFXjSQP/SSDPlEL8mQX/SS
+A/lGL9GQ/8f1cvL3zIRXfVq4l7YI26pR907upVGT6Fj77TXupdWxLizufj/3
+UhGsLo53usW9NN1aGOx4cId7SW9vqKgyjHIvVUHqBc+we9xLX/OppJqTOu4l
+avpc15etkwS9dG68/vLB4fsEvSR+7nQi4Mo0QS9T98L1k+dnCHoR53nNxSgN
+BL2UZavzfSWzBL18ljYYcUaYJeglO0Eql+2fI+jlRTvSHmZnJOhl5nxuckG5
+kaCX0tpdp59aNRL08lKZcrx9j4mgF/cjyviAehNBL0uFys6zOhNBLzkebsqp
+h9hvkeivXw1qP9cHBL3kw3v0YlXExqMXOdRHLyEwP3o5DetDL6uwfvQSAvtD
+LyrYP3ophfNBLz/C+aEXGZwverGdYOePXgqgP+jlDvQPvWRAf9GLHvqPXhoh
+H+ilAPKDXrohX+jlF8gferkK+UQv3ZBf9NIL+UYvdZD/x/ViuY9Z7mOW+5jl
+PoZeLPcxy33Mch+z3Mcs9zHm5f+6j/0L9/ISxQ==
+   "], {
+    {Hue[0.67, 0.6, 0.6], 
+     TagBox[InsetBox["\[Alpha]", 154],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 155],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 156],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 157],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 158],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 159],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 160],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 161],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 162],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 163],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 164],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 165],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 166],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 167],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 168],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 169],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 170],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 171],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 172],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 173],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 174],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 175],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 176],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 177],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 178],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 179],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 180],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 181],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 182],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 183],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 184],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 185],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 186],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 187],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 188],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 189],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 190],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 191],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 192],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 193],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 194],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 195],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 196],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 197],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 198],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 199],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 200],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 201],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 202],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 203],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 204],
+      "InsetString"]}, 
+    {Hue[0.9060679774997897, 0.6, 0.6], 
+     TagBox[InsetBox["\[Beta]", 205],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 206],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 207],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 208],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 209],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 210],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 211],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 212],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 213],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 214],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 215],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 216],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 217],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 218],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 219],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 220],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 221],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 222],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 223],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 224],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 225],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 226],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 227],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 228],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 229],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 230],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 231],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 232],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 233],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 234],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 235],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 236],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 237],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 238],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 239],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 240],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 241],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 242],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 243],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 244],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 245],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 246],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 247],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 248],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 249],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 250],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 251],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 252],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 253],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 254],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 255],
+      "InsetString"]}, 
+    {Hue[0.1421359549995791, 0.6, 0.6], 
+     TagBox[InsetBox["\[Gamma]", 256],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 257],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 258],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 259],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 260],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 261],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 262],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 263],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 264],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 265],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 266],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 267],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 268],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 269],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 270],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 271],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 272],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 273],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 274],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 275],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 276],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 277],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 278],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 279],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 280],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 281],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 282],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 283],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 284],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 285],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 286],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 287],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 288],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 289],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 290],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 291],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 292],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 293],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 294],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 295],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 296],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 297],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 298],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 299],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 300],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 301],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 302],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 303],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 304],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 305],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 306],
+      "InsetString"]}, {}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotLabel->FormBox[
+   "\"Forward Euler cross section of 1D Heat Eq at t step \[Alpha]=5, \
+\[Beta]=10, \[Gamma]=15\"", TraditionalForm],
+  PlotRange->{{-5., 5.}, {0, 20}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellChangeTimes->{
+  3.53817243358484*^9, 3.538172813074634*^9, 3.5381730666651382`*^9, 
+   3.5381734007012444`*^9, 3.538173444394743*^9, {3.5381734790497255`*^9, 
+   3.538173522007182*^9}, 3.538173618916725*^9}],
+
+Cell[BoxData[
+ GraphicsBox[GraphicsComplexBox[CompressedData["
+1:eJzt1mtQlFUYB/AXFrntsnENcsOBVWEIFSQgkJnOSXSGDMVwgMqgkkBTQLZp
+ioYiEgwLS2oCWQQCZkQItAG5NBDsiwgzBCZJRBAXZYGWBpFraoI17Hme860Z
+v/Rt3y+w877nOZfn/5s5roeOh8cZC4LgYyQIa3/ZYy/if0/rHzvxaFtQZLmT
+lsTrH1vxQpFV6z35IilQrz024iuZA95701bItZ61x1psqzmb9brOmLIq1uLG
+gt0qVZoZZePloo80OLVuRUr1n/fIxFatrmmflzVl80nFiMbg9tEwW8rqW4gn
+954f0EbbQz1zcVrrm7cn6nGoZyrGe5y9Yb/DCeqZiJZ+0bkHTdZDPYlY9un3
+wot1CqovpzYSmz/pcdoZ4gz1BLGic2tSfusGGL+iqXSo+uW2pQvN139/X3N4
+QJL6crkLzPeXJuOq1m3R25X66Osvan60i+31+tYV6s1pWtyiZnNtlDB+WjPi
+kKpriVdSb/33Wk2hh29KeKWS5ujfD2piHX+7az2opOn6312ahPDYkq5lJa5P
+2GP/df1r/yhpCXtPDsN79nuQHITxAaw+OQP12ftpch3mh/WRi7A+X7Z+0gjr
+P8L2RxJhf4Vs/2Q/7L+XnQ/JgfOB5dEkOD/WLyP6Ppwvqy+hMXD+P7H+0A5f
+1h82nyl1hf5Bf2k59JfNb0GDof+snpQ6QT4gP/Qk5IfVk9NuS5YvyB/tUrP8
+sfmt6TuQT8gvnchg+WXjbWkk5JvNZ0efgPyDD96X//JSnn35UElaD/dyvGBJ
+FZQ8zL0k7zC/5Ldzknuxv1AY0uc/Q9BLwWhY53tZ8wS9OKdFbO69tUTQy7KK
+fPGY+z2CXlqkFRt0Bx4Q9PJra/q5TXEPCXpRPhk70F8lcC/nz53IfM7emHux
+8Grf/tZRCfcSqZJ6L1abcC8Zce2l6qF13IvVKaurngum3Mv4sxeVZxbMuBer
+b2LrxSFz7mVkd9lkf6UF9xI3k526GmPJvUj2H1Cl37fkXm7eUVZfSZFyL7W/
+31AHD0u5lysh12qLN8q4l8zm4rHsfTLel7e3d7eNvSrjXj6C9+ilAcajl1Ko
+j166YX70ogtj60Mvu2D96KUB9odebhWz/aOXGjgf9DKUxc4PvYTC+aIXZzh/
+9PLzNtYf9JIE/UMvtxWsv+glGfqPXmIgH+ilCPKDXno+ZPlCLxGQP/RSWs7y
+iV6cIL/o5a6a5Ru9bIH8P6oXMVT1We6ueu5leL3McyCwg3vxfqmver75OvcS
+tNk/4KG8n3sJTJALLU8NcS8NqyPz0i1j3IvxXEHwrOk492LTnLeuJG6Ce4nS
+yl9o+G6Ke8nwcFy4Oa4j6EXloBP+WPmToBczv8aJigczBL2MPj+ZpxyZJeil
+qtOzryFsjqCXryre/fINl3mCXk415dS1js0T9BJYKZmSfb5A0Mtc9N9WRe6L
+BL3Uebmb9F1aJOgl9PSprW7KJYJeli4nmCo/XiLo5bSjR3589xJBL4pj8qEK
+YZmgl+SUZ1ZrXZYJb4liquxNz2WCXhLhPXpxgPHoJR3qo5dxmB+9BMD60Esh
+rB+99MP+0IsC9o9ejsD5oJdEOD/0cgLOF71kw/mjlxpf1h/0ooD+oZdt0F/0
+Ygr9Ry8dTSwf6OWHOyw/6MUf8oVeuo6x/KGXsU0sn+ilNIrlF718APlGLzGQ
+/0f1YriPGe5jhvuY4T6GXgz3McN9zHAfM9zHDPcx5uX/uo/9CyvSFX0=
+   "], {
+    {Hue[0.67, 0.6, 0.6], 
+     TagBox[InsetBox["\[Alpha]", 154],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 155],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 156],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 157],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 158],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 159],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 160],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 161],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 162],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 163],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 164],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 165],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 166],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 167],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 168],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 169],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 170],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 171],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 172],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 173],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 174],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 175],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 176],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 177],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 178],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 179],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 180],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 181],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 182],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 183],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 184],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 185],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 186],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 187],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 188],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 189],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 190],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 191],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 192],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 193],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 194],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 195],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 196],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 197],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 198],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 199],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 200],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 201],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 202],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 203],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 204],
+      "InsetString"]}, 
+    {Hue[0.9060679774997897, 0.6, 0.6], 
+     TagBox[InsetBox["\[Beta]", 205],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 206],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 207],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 208],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 209],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 210],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 211],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 212],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 213],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 214],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 215],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 216],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 217],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 218],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 219],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 220],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 221],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 222],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 223],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 224],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 225],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 226],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 227],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 228],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 229],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 230],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 231],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 232],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 233],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 234],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 235],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 236],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 237],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 238],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 239],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 240],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 241],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 242],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 243],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 244],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 245],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 246],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 247],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 248],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 249],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 250],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 251],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 252],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 253],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 254],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 255],
+      "InsetString"]}, 
+    {Hue[0.1421359549995791, 0.6, 0.6], 
+     TagBox[InsetBox["\[Gamma]", 256],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 257],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 258],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 259],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 260],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 261],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 262],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 263],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 264],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 265],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 266],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 267],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 268],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 269],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 270],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 271],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 272],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 273],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 274],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 275],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 276],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 277],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 278],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 279],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 280],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 281],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 282],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 283],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 284],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 285],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 286],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 287],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 288],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 289],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 290],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 291],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 292],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 293],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 294],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 295],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 296],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 297],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 298],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 299],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 300],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 301],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 302],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 303],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 304],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 305],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 306],
+      "InsetString"]}, {}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotLabel->FormBox[
+   "\"Backward Euler cross section for 1D Heat Eq at t step \[Alpha]=5, \
+\[Beta]=10, \[Gamma]=15\"", TraditionalForm],
+  PlotRange->{{-5., 5.}, {0, 20}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellChangeTimes->{
+  3.53817243358484*^9, 3.538172813074634*^9, 3.5381730666651382`*^9, 
+   3.5381734007012444`*^9, 3.538173444394743*^9, {3.5381734790497255`*^9, 
+   3.538173522007182*^9}, 3.538173619101736*^9}],
+
+Cell[BoxData[
+ GraphicsBox[GraphicsComplexBox[CompressedData["
+1:eJzt1mtQlFUYB/CXS8tl150NULknG6TJpZCdFGg6R4nIHNnAQGiwMTKFaoR0
+MrFADNO8EPSBQQRtEdQpQhIHbELZN4bL6CJggQhSTFw2IAbcCwgl1rDnec63
+ZvzSt32/wM675zmX5/+bPX6pGfHv2gqCsMZGEBb/ssdNxP/CLI+rqFJsXtri
+Okx2Wh4XcVn/YL6ns4mcLll8nhR/Kpo45vDxQ3KrffFRiNt+mcj9ctiWsioK
+cSF4IGTffgfKxsvFyINTW4pnpNTy9XaZmO/26pGwQAVl80nFQ9Hx/ZGbXCir
+7yRWrw+ub0xyg3qOYvHmNyO+iVsG9SSifVxRzUKYO9SzF0/d8zjSs+AB9ezE
+ig+yIt6p9qKWciU24nF1oq+Z+kA9QWx69qSdsd4Xxj/UqlvX7zBKVtBTlu/P
+a/Mb1UPh51bAfLNaf2fDsStBfnSNpb5J23z16Pbu835Q77629vaveuUSJYwf
+136bO3ZibaqSPm/5/rDWoddLfr1SSQst7/u0ZtVzusxuJc21fL6hTcuIfKQ0
+KHF9wt5VT0/W/6WkGvaepMN79rmPzMD4daw+cYb67P04uQTzw/rID7A+FVs/
+0cH609j+SBDsr4ztnxTB/rvY+ZAkOB9YHr0D58f6ZUO/hvNl9e1oHZx/B+sP
+rYL+sPkk1B36B/2lNdBfNr8TbYX+s3pSWgr5gPzQi5AfVk9O0yBfkD/qH8Ly
+x+ZX0GzIJ+SXGiG/bLwLfQHyzeZzpQmQf/DB+/JfXqIreuw/yWznXlaK5eE+
+qQPcy2uDntMX145yL6ZPdYW3V00S9PLMpgM2zTkGgl4SHhzesKfXTNBLSui0
+xMVrjqCXLxKiFVtf+ZugF+8tgQ1LEh8R9PLizh99CioE7kUukf8WI7XlXvp0
+D2patttxL2+PzhbUnLPnXgo2qjaInU9wLwV57qVtegn38lJWSW2V3oF7mbvm
+ZPNehyP3Ul23cYf7GSfuJaElXqaPc+ZeQrODY70nnbmX8rbslKfel3Iv185O
+jOzukHIvvXFNX11YKuNe9LuSMnKojPdlvqFepYuVcS/4Hr3chfHo5TrURy+V
+MD96UcH60EsyrB+9XIb9oZcF2D96iYHzQS+lcH7o5QycL3rJhPNHLxPQH/Ti
+B/1DL2roL3qJgv6jl8uQD/TyGeQHvXwE+UIvUZA/9BKQzfKJXjIhv+glBfKN
+Xg5A/h/Xy7bZpH2NqjruJXJg13LH1S3ci7cm3VFd2cm95J0OkKv/6eZeUkz1
+d8jyfu6lvGwwq9ttkHs5Xl7leWj+d+4louwNISNxhHspvFHW1HVWz72cbCud
+29o1RtBLshj7+q2xCYJeTnzerHPRTxL0sudq7UhA6xRBL41vBdwsjLpP0Ivx
+ksZX42og6EUzLWvY/bOBoJfwXuPdyINGgl70V0aHkjxMBL2M3Bv1X60xEfSy
+v6cmfaWrmaCXoZjkwwMfmgn/fan+vmW8wUzQS2DIeIq9wUzQS7EQWjGrmMH1
+CetGRuM0XjMEveB79BIE4/nvC9RHL3/A/OglG9aHXv6E9aOXKdgfenkZ9o9e
+quB80MsCnB96uQnni17y4fzRy3noD3rZC/1DLxegv+jlO+g/ekmAfKCXSsgP
+eumEfKGXPMgfeqmAfKKXWMgv9wL5Ri85kP/H9WK9j1nvY9b7mPU+hl6s9zHr
+fcx6H7Pex6z3Mebl/7qP/QvwuiE3
+   "], {
+    {Hue[0.67, 0.6, 0.6], 
+     TagBox[InsetBox["\[Alpha]", 154],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 155],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 156],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 157],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 158],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 159],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 160],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 161],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 162],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 163],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 164],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 165],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 166],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 167],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 168],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 169],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 170],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 171],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 172],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 173],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 174],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 175],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 176],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 177],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 178],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 179],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 180],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 181],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 182],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 183],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 184],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 185],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 186],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 187],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 188],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 189],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 190],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 191],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 192],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 193],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 194],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 195],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 196],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 197],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 198],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 199],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 200],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 201],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 202],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 203],
+      "InsetString"], 
+     TagBox[InsetBox["\[Alpha]", 204],
+      "InsetString"]}, 
+    {Hue[0.9060679774997897, 0.6, 0.6], 
+     TagBox[InsetBox["\[Beta]", 205],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 206],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 207],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 208],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 209],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 210],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 211],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 212],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 213],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 214],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 215],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 216],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 217],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 218],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 219],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 220],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 221],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 222],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 223],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 224],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 225],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 226],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 227],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 228],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 229],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 230],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 231],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 232],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 233],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 234],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 235],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 236],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 237],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 238],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 239],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 240],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 241],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 242],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 243],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 244],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 245],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 246],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 247],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 248],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 249],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 250],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 251],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 252],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 253],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 254],
+      "InsetString"], 
+     TagBox[InsetBox["\[Beta]", 255],
+      "InsetString"]}, 
+    {Hue[0.1421359549995791, 0.6, 0.6], 
+     TagBox[InsetBox["\[Gamma]", 256],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 257],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 258],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 259],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 260],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 261],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 262],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 263],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 264],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 265],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 266],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 267],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 268],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 269],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 270],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 271],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 272],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 273],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 274],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 275],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 276],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 277],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 278],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 279],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 280],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 281],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 282],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 283],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 284],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 285],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 286],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 287],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 288],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 289],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 290],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 291],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 292],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 293],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 294],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 295],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 296],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 297],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 298],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 299],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 300],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 301],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 302],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 303],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 304],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 305],
+      "InsetString"], 
+     TagBox[InsetBox["\[Gamma]", 306],
+      "InsetString"]}, {}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotLabel->FormBox[
+   "\"Crank-Nicolson cross section of 1D Heat Eq at t step \[Alpha]=5, \
+\[Beta]=10, \[Gamma]=15\"", TraditionalForm],
+  PlotRange->{{-5., 5.}, {0, 20}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], Automatic}]], "Output",
+ CellChangeTimes->{
+  3.53817243358484*^9, 3.538172813074634*^9, 3.5381730666651382`*^9, 
+   3.5381734007012444`*^9, 3.538173444394743*^9, {3.5381734790497255`*^9, 
+   3.538173522007182*^9}, 3.5381736194117537`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\!\\(\\*SubscriptBox[\\(FE\\), \\(500\\)]\\)= \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.5961555641651016`", ",", "1.1875971377730143`", ",", 
+     "1.7790387113809272`", ",", "2.3564144992547935`", ",", 
+     "2.9337902871286596`", ",", "3.48797559149334`", ",", 
+     "4.042160895858021`", ",", "4.564404705967025`", ",", 
+     "5.08664851607603`", ",", "5.568713086716604`", ",", 
+     "6.0507776573571785`", ",", "6.485068654518269`", ",", 
+     "6.91935965167936`", ",", "7.299044780393902`", ",", 
+     "7.678729909108442`", ",", "7.997844312655859`", ",", 
+     "8.316958716203276`", ",", "8.570495814538852`", ",", 
+     "8.824032912874427`", ",", "9.008019701483175`", ",", 
+     "9.192006490091924`", ",", "9.303562625500605`", ",", 
+     "9.415118760909289`", ",", "9.452499002598579`", ",", 
+     "9.48987924428787`", ",", "9.452499002598584`", ",", "9.4151187609093`", 
+     ",", "9.303562625500623`", ",", "9.192006490091947`", ",", 
+     "9.008019701483201`", ",", "8.824032912874456`", ",", 
+     "8.57049581453888`", ",", "8.316958716203304`", ",", 
+     "7.997844312655888`", ",", "7.678729909108472`", ",", 
+     "7.29904478039393`", ",", "6.919359651679389`", ",", 
+     "6.485068654518296`", ",", "6.050777657357203`", ",", 
+     "5.568713086716627`", ",", "5.086648516076051`", ",", 
+     "4.564404705967043`", ",", "4.042160895858036`", ",", 
+     "3.487975591493353`", ",", "2.9337902871286703`", ",", 
+     "2.3564144992548024`", ",", "1.7790387113809336`", ",", 
+     "1.1875971377730186`", ",", "0.5961555641651037`", ",", "0.`"}], "}"}]}],
+  SequenceForm["\!\(\*SubscriptBox[\(FE\), \(500\)]\)= ", CompressedData["
+1:eJxTTMoPSmVkYGAwZkCA+pjcq1uEH9uff2dxO5Xhs328/m7vj2V/7G9+Cbjx
+/iaTA1PQEa70CnaHlHWm++Ofczskt1621NEWcPgSsdzvs6OQQ5tOdfKuCBEH
+NVbDnTFuYg7H7j7j+28s4fDnYey1rR8kHYyfXZmbs1bawTm4/rSFkaxD0AHN
+nyzb5RyEcl2fnfor7/CyZ0OmxyIFB5ZnzOwSKooO8vbhS54vVXQQM2jXkGZR
+cuBT3L7GL0nJwXFBZX/ObCWHUnmboq4rSg4xLsyf1z5XcnDJPFV88ZeSQzyU
+Xw2V94aql4bqV4Wapw81XwRq30+o/UZQ9xRD3ZcMdW8w1P1SjyD+eQT1nz3U
+v3Oh/ueIhIRHCTR8GqHhJQUNv7fQ8KyBhu8jaHhPgoY/LD4AQb2m8g==
+   "]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.53817281353166*^9, 3.5381730671211643`*^9, 3.5381734011312685`*^9, 
+   3.538173444923774*^9, {3.5381734795047517`*^9, 3.538173522472209*^9}, 
+   3.538173619447756*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\!\\(\\*SubscriptBox[\\(BE\\), \\(500\\)]\\)= \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.5967590030905232`", ",", "1.1911551879837619`", ",", 
+     "1.7808353336224827`", ",", "2.3634653657120173`", ",", 
+     "2.936739811836803`", ",", "3.498391116126549`", ",", 
+     "4.046198769058661`", ",", "4.577998209961`", ",", "5.0916894621508435`",
+      ",", "5.5852454633504545`", ",", "6.056720056987933`", ",", 
+     "6.504255613149562`", ",", "6.926090251220019`", ",", 
+     "7.320564639552397`", ",", "7.68612835077662`", ",", 
+     "8.021345754513122`", ",", "8.324901432246135`", ",", 
+     "8.595605101874986`", ",", "8.832396041960141`", ",", 
+     "9.034347007883634`", ",", "9.200667634034227`", ",", 
+     "9.330707317702768`", ",", "9.423957581642474`", ",", 
+     "9.480053913234961`", ",", "9.498777078939515`", ",", 
+     "9.480053913234952`", ",", "9.42395758164246`", ",", 
+     "9.330707317702744`", ",", "9.200667634034202`", ",", 
+     "9.034347007883605`", ",", "8.832396041960108`", ",", 
+     "8.595605101874947`", ",", "8.324901432246094`", ",", 
+     "8.021345754513078`", ",", "7.686128350776569`", ",", 
+     "7.320564639552338`", ",", "6.926090251219959`", ",", 
+     "6.504255613149501`", ",", "6.056720056987872`", ",", 
+     "5.585245463350395`", ",", "5.091689462150785`", ",", 
+     "4.5779982099609455`", ",", "4.04619876905861`", ",", 
+     "3.4983911161265033`", ",", "2.936739811836763`", ",", 
+     "2.363465365711983`", ",", "1.7808353336224565`", ",", 
+     "1.1911551879837439`", ",", "0.5967590030905142`", ",", "0.`"}], "}"}]}],
+  SequenceForm["\!\(\*SubscriptBox[\(BE\), \(500\)]\)= ", CompressedData["
+1:eJxTTMoPSmVkYGAwZkCArIPWYcskHtsvn8u77wffZ/uolusGvnV/7A9unN6e
+8ILJQXmWa2FhHbuDEbdz9ZY/3A77Hr/Y5acv4BC63fnwPX8hh1bfpdcfx4o4
+vHxsMs0rXMwhTXP6JRErCQcu09ip0SxSDos6dzAEbpF22N12RsLJQ9ZhxTHd
+vBn75BxWiq6+8pZLwSH9OnN15DIFh+Yjj9U+Gyg6nBJOvqC/StFhr1r4u6mC
+Sg53Ratf7E1TcpijaVIRtFLJIVn8xneBm0oOOUHJC05+VXLwEpmyNf6/kkM6
+lB8Nle+Hqj8P1b8Wat52qPm5UPsCoPZPgLonD+q+Sqh746DuP2oC8Y8i1H/L
+oP51hvpfAhYe0PA5zQUJr5MzIeFXAg3PJ82Q8A2DhrckNPxh8QEA9zqozw==
+
+   "]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.53817281353166*^9, 3.5381730671211643`*^9, 3.5381734011312685`*^9, 
+   3.538173444923774*^9, {3.5381734795047517`*^9, 3.538173522472209*^9}, 
+   3.538173619451756*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\!\\(\\*SubscriptBox[\\(CR\\), \\(500\\)]\\)= \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.5961633125339234`", ",", "1.1899667303056325`", ",", 
+     "1.7790599238736464`", ",", "2.3611116477645013`", ",", 
+     "2.9338191662734503`", ",", "3.4949175412329203`", ",", 
+     "4.042188738011771`", ",", "4.573470507880644`", ",", 
+     "5.086665007126084`", ",", "5.579747115861571`", ",", 
+     "6.050772422302774`", ",", "6.4978848412782995`", ",", 
+     "6.919323838864474`", ",", "7.313431238191592`", ",", 
+     "7.678657584600332`", ",", "8.013568051365977`", ",", 
+     "8.316847870096604`", ",", "8.587307272599965`", ",", 
+     "8.82388593346321`", ",", "9.025656904771356`", ",", 
+     "9.191830036288895`", ",", "9.321754876039916`", ",", 
+     "9.414923047554545`", ",", "9.470970101123115`", ",", 
+     "9.489676837245701`", ",", "9.470970101123116`", ",", 
+     "9.414923047554547`", ",", "9.321754876039922`", ",", 
+     "9.191830036288902`", ",", "9.025656904771367`", ",", 
+     "8.823885933463222`", ",", "8.587307272599979`", ",", 
+     "8.316847870096618`", ",", "8.013568051365993`", ",", 
+     "7.67865758460035`", ",", "7.313431238191611`", ",", "6.91932383886449`",
+      ",", "6.497884841278316`", ",", "6.050772422302792`", ",", 
+     "5.5797471158615926`", ",", "5.086665007126106`", ",", 
+     "4.573470507880667`", ",", "4.042188738011794`", ",", 
+     "3.4949175412329403`", ",", "2.9338191662734676`", ",", 
+     "2.3611116477645155`", ",", "1.7790599238736573`", ",", 
+     "1.1899667303056396`", ",", "0.5961633125339271`", ",", "0.`"}], "}"}]}],
+  SequenceForm["\!\(\*SubscriptBox[\(CR\), \(500\)]\)= ", CompressedData["
+1:eJxTTMoPSmVkYGAwZkAAEwFf0aPCj+3Fbt3vleL6bH9w6qtO9vI/9rGXXzX0
+PWZy+Kt7R6+sgt3Buv5d8PSv3A69Ih5txtoCDo2uQbesvYUc1jrqbtsXIeIw
+3TfKamWgmANL4NT1f40lHGbclmy7+lfSYXFOpVXyWmmHLv8wuS8Osg6HNHuY
+P22Tc/A/5pjyiU3BoXef/yPLRQoOKlwfOzfrKDoc2d6ecGWposOmi3efKfEq
+OaxqeNFtnqTkwH5dmm/vEiWHLyb6pwuuKDlk5Fv/U/qo5FCsofxm2y8lh0wo
+/ytUnguqfh1U/w6oeaeh5utA7ZsKtT8C6p5rUPfNh7p3K9T9q6H+kYD6bz3U
+v8eg/p8NDY/l0PDJgIaXih4k/Gqh4fkJGr5m0PAOhYY/LD4AHYapuw==
+   "]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.53817281353166*^9, 3.5381730671211643`*^9, 3.5381734011312685`*^9, 
+   3.538173444923774*^9, {3.5381734795047517`*^9, 3.538173522472209*^9}, 
+   3.5381736194567566`*^9}],
+
+Cell[BoxData["\<\"Glance at temperatures at the \
+\\!\\(\\*SuperscriptBox[\\(500\\), \\(th\\)]\\) time step shows how Forward \
+Euler is shows lower temperatures (overshoots), Backward Euler cools slower, \
+and Crank-Nicolson falls in between and is more numerically stable.\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.53817281353166*^9, 3.5381730671211643`*^9, 3.5381734011312685`*^9, 
+   3.538173444923774*^9, {3.5381734795047517`*^9, 3.538173522472209*^9}, 
+   3.5381736194607563`*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{707, 505},
+WindowMargins->{{318, Automatic}, {Automatic, 15}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (October 6, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 20322, 629, 2437, "Input"],
+Cell[20904, 653, 11951, 354, 274, "Output"],
+Cell[32858, 1009, 11969, 354, 274, "Output"],
+Cell[44830, 1365, 11942, 354, 274, "Output"],
+Cell[CellGroupData[{
+Cell[56797, 1723, 2386, 43, 119, "Print"],
+Cell[59186, 1768, 2393, 44, 119, "Print"],
+Cell[61582, 1814, 2396, 43, 119, "Print"],
+Cell[63981, 1859, 486, 8, 62, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

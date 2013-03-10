@@ -1,0 +1,620 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     23395,        611]
+NotebookOptionsPosition[     22790,        588]
+NotebookOutlinePosition[     23132,        603]
+CellTagsIndexPosition[     23089,        600]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "t", ",", " ", "y", ",", " ", "\[CapitalDelta]t", ",", "i", ",", "Np", ",", 
+   "B", ",", "rkArray", ",", "rk2Array"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"B", "[", "t_", "]"}], ":=", 
+    RowBox[{".00713535", "-", 
+     RowBox[{".03774882", "*", "t"}], "+", 
+     RowBox[{".06101010", "*", 
+      SuperscriptBox["t", "2"]}], "-", 
+     RowBox[{".02473805", "*", 
+      SuperscriptBox["t", "3"]}]}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalDelta]t", "=", ".125"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Np", "[", 
+    RowBox[{"t_", ",", "y_"}], "]"}], ":=", 
+   RowBox[{
+    RowBox[{".09", "*", "y"}], "-", 
+    RowBox[{
+     RowBox[{"B", "[", "t", "]"}], "*", 
+     SuperscriptBox["y", "1.7"]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"i", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["t", "i"], "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["y", "i"], "=", "100."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"feArray", "=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{
+      SubscriptBox["t", "i"], ",", 
+      SubscriptBox["y", "i"]}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{"i", "<", "9"}], ",", "\[IndentingNewLine]", "\t", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["k", "0"], "=", 
+     RowBox[{"Np", "[", 
+      RowBox[{
+       SubscriptBox["t", "i"], ",", 
+       SubscriptBox["y", "i"]}], "]"}]}], ";", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+     SubscriptBox["y", 
+      RowBox[{"i", "+", "1"}]], "=", 
+     RowBox[{
+      SubscriptBox["y", "i"], "+", 
+      RowBox[{
+       RowBox[{"(", 
+        SubscriptBox["k", "0"], ")"}], "*", "\[CapitalDelta]t"}]}]}], ";", 
+    "\[IndentingNewLine]", "\t", 
+    RowBox[{"i", "++"}], ";", "\[IndentingNewLine]", "\t", 
+    RowBox[{
+     SubscriptBox["t", "i"], "=", 
+     RowBox[{
+      SubscriptBox["t", 
+       RowBox[{"i", "-", "1"}]], "+", "\[CapitalDelta]t"}]}], ";", 
+    "\[IndentingNewLine]", "\t", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"feArray", ",", 
+      RowBox[{"{", 
+       RowBox[{
+        SubscriptBox["t", "i"], ",", 
+        SubscriptBox["y", 
+         RowBox[{"i", "+", "1"}]]}], "}"}]}], "]"}], ";"}]}], 
+  "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fePlot", "=", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"feArray", ",", " ", 
+     RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", "Blue", "}"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", "fePlot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "\"\<Forward Euler for population growth\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"t", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"i", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["y", "i"], "=", "100"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rkArray", "=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", 
+      SubscriptBox["y", "i"]}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rk2Array", "=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", 
+      SubscriptBox["y", "i"]}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eArray", "=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "0"}], "}"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"While", "[", 
+  RowBox[{
+   RowBox[{"i", "<", "9"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["k", "0"], "=", 
+     RowBox[{"\[CapitalDelta]t", "*", 
+      RowBox[{"Np", "[", 
+       RowBox[{"t", ",", 
+        SubscriptBox["y", "i"]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["k", "1"], "=", 
+     RowBox[{"\[CapitalDelta]t", "*", 
+      RowBox[{"Np", "[", 
+       RowBox[{
+        RowBox[{"t", "+", 
+         RowBox[{".25", "*", "\[CapitalDelta]t"}]}], ",", 
+        RowBox[{
+         SubscriptBox["y", "i"], "+", 
+         RowBox[{".25", "*", 
+          SubscriptBox["k", "0"]}]}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["k", "2"], "=", 
+     RowBox[{"\[CapitalDelta]t", "*", 
+      RowBox[{"Np", "[", 
+       RowBox[{
+        RowBox[{"t", "+", 
+         RowBox[{
+          FractionBox["3.", "8."], "*", "\[CapitalDelta]t"}]}], ",", 
+        RowBox[{
+         SubscriptBox["y", "i"], "+", 
+         RowBox[{
+          FractionBox["3.", "32."], "*", 
+          SubscriptBox["k", "0"]}], "+", 
+         RowBox[{
+          FractionBox["9.", "32."], 
+          SubscriptBox["k", "1"]}]}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["k", "3"], "=", 
+     RowBox[{"\[CapitalDelta]t", "*", 
+      RowBox[{"Np", "[", 
+       RowBox[{
+        RowBox[{"t", "+", 
+         RowBox[{
+          FractionBox["12.", "13."], "\[CapitalDelta]t"}]}], ",", 
+        RowBox[{
+         SubscriptBox["y", "i"], "+", 
+         RowBox[{
+          FractionBox["1932.", "2197."], "*", 
+          SubscriptBox["k", "0"]}], "-", 
+         RowBox[{
+          FractionBox["7200.", "2197."], "*", 
+          SubscriptBox["k", "1"]}], "+", 
+         RowBox[{
+          FractionBox["7296.", "2197."], "*", 
+          SubscriptBox["k", "2"]}]}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["k", "4"], "=", 
+     RowBox[{"\[CapitalDelta]t", "*", 
+      RowBox[{"Np", "[", 
+       RowBox[{
+        RowBox[{"t", "+", "\[CapitalDelta]t"}], ",", 
+        RowBox[{
+         SubscriptBox["y", "i"], "+", 
+         RowBox[{
+          FractionBox["439.", "216."], "*", 
+          SubscriptBox["k", "0"]}], "-", 
+         RowBox[{"8", "*", 
+          SubscriptBox["k", "1"]}], "+", 
+         RowBox[{
+          FractionBox["3680.", "513."], "*", 
+          SubscriptBox["k", "2"]}], "-", 
+         RowBox[{
+          FractionBox["845.", "4104."], "*", 
+          SubscriptBox["k", "3"]}]}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["k", "5"], "=", 
+     RowBox[{"\[CapitalDelta]t", "*", 
+      RowBox[{"Np", "[", 
+       RowBox[{
+        RowBox[{"t", "+", 
+         RowBox[{".5", "*", "\[CapitalDelta]t"}]}], ",", 
+        RowBox[{
+         SubscriptBox["y", "i"], "-", 
+         RowBox[{
+          FractionBox["8.", "27."], "*", 
+          SubscriptBox["k", "0"]}], "+", 
+         RowBox[{"2", 
+          SubscriptBox["k", "1"]}], "-", 
+         RowBox[{
+          FractionBox["3544.", "2565."], "*", 
+          SubscriptBox["k", "2"], "*", 
+          FractionBox["1859.", "4104."], "*", 
+          SubscriptBox["k", "3"]}], "-", 
+         RowBox[{
+          FractionBox["11.", "40."], "*", 
+          SubscriptBox["k", "4"]}]}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["y", 
+      RowBox[{"i", "+", "1"}]], "=", 
+     RowBox[{
+      SubscriptBox["y", "i"], "+", 
+      RowBox[{
+       FractionBox["25.", "216."], "*", 
+       SubscriptBox["k", "0"]}], "+", 
+      RowBox[{
+       FractionBox["1408.", "2565."], "*", 
+       SubscriptBox["k", "2"]}], "+", 
+      RowBox[{
+       FractionBox["2197.", "4014."], "*", 
+       SubscriptBox["k", "3"]}], "-", 
+      RowBox[{
+       FractionBox["1.", "5."], "*", 
+       SubscriptBox["k", "4"]}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{
+     SubscriptBox["y", "bar2"], "=", 
+     RowBox[{
+      SubscriptBox["y", "i"], "+", 
+      RowBox[{
+       FractionBox["16.", "35."], "*", 
+       SubscriptBox["k", "0"]}], "+", 
+      RowBox[{
+       FractionBox["6656.", "12825."], "*", 
+       SubscriptBox["k", "2"]}], "+", 
+      RowBox[{
+       FractionBox["28561.", "56430."], "*", 
+       SubscriptBox["k", "3"]}], "-", 
+      RowBox[{
+       FractionBox["9.", "50."], "*", 
+       SubscriptBox["k", "4"]}], "+", 
+      RowBox[{
+       FractionBox["2.", "55."], "*", 
+       SubscriptBox["k", "5"]}]}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"rkArray", ",", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", 
+        SubscriptBox["y", 
+         RowBox[{"i", "+", "1"}]]}], "}"}]}], "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"rk2Array", ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", 
+        SubscriptBox["y", "bar2"]}], "}"}]}], "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"AppendTo", "[", 
+     RowBox[{"eArray", ",", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", 
+        RowBox[{"Abs", "[", 
+         RowBox[{
+          SubscriptBox["y", "bar2"], "-", 
+          SubscriptBox["y", 
+           RowBox[{"i", "+", "1"}]]}], "]"}]}], "}"}]}], "]"}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{"i", "++"}], ";", "\[IndentingNewLine]", 
+    RowBox[{"t", "=", 
+     RowBox[{"t", "+", "\[CapitalDelta]t"}]}], ";"}]}], "\[IndentingNewLine]",
+   "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rkPlot", "=", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"rkArray", ",", " ", 
+     RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", "Blue", "}"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", "rkPlot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "\"\<Runge-Kutta with p=4 for population growth\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rk2Plot", "=", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"rk2Array", ",", " ", 
+     RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", "Blue", "}"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", "rk2Plot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "\"\<Runge-Kutta with p=5 for population growth\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ePlot", "=", 
+   RowBox[{"ListLinePlot", "[", 
+    RowBox[{"eArray", ",", " ", 
+     RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+     RowBox[{"PlotStyle", "\[Rule]", 
+      RowBox[{"{", "Blue", "}"}]}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", "ePlot", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  "\"\<Runge-Kutta error at each time step with p=5 and p=4\>\"", 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.5397881937697506`*^9, 3.5397882610015965`*^9}, {
+   3.539788869734414*^9, 3.53978887806789*^9}, {3.5397889251305823`*^9, 
+   3.539788932205987*^9}, {3.5397894155316315`*^9, 3.539789422869051*^9}, {
+   3.539789778256378*^9, 3.539789859722038*^9}, {3.5397900973076267`*^9, 
+   3.5397902469881883`*^9}, {3.5397902802220893`*^9, 
+   3.5397903064635897`*^9}, {3.539790348572998*^9, 3.539790378126689*^9}, {
+   3.539790419072031*^9, 3.5397904226692367`*^9}, {3.539790929768241*^9, 
+   3.539790943306015*^9}, {3.5397911379421477`*^9, 3.539791156026182*^9}, {
+   3.5397912057180243`*^9, 3.5397912712437725`*^9}, 3.539791504247099*^9, {
+   3.539791957876045*^9, 3.5397919802733264`*^9}, {3.539792012190152*^9, 
+   3.539792018253499*^9}, {3.5397921013882537`*^9, 3.5397921136379547`*^9}, {
+   3.539792459192719*^9, 3.539792479561884*^9}, {3.539792842147623*^9, 
+   3.5397928935455627`*^9}, {3.5397931068137608`*^9, 
+   3.5397931276119504`*^9}, {3.539793189690501*^9, 3.5397932158219957`*^9}, {
+   3.5397932985867295`*^9, 3.539793390954013*^9}, {3.5397935081767178`*^9, 
+   3.539793635176982*^9}, {3.5398000156100674`*^9, 3.539800022954487*^9}, {
+   3.5398002396258802`*^9, 3.539800240636938*^9}, {3.5398003054946475`*^9, 
+   3.5398003185083923`*^9}, {3.539801250505699*^9, 3.539801267148651*^9}, {
+   3.539801814454955*^9, 3.539801816353064*^9}, {3.5398018805667367`*^9, 
+   3.539801911278493*^9}, {3.5398020127402964`*^9, 3.5398020344845405`*^9}, {
+   3.5398021277718763`*^9, 3.5398021428697395`*^9}, 3.539802483582227*^9, {
+   3.5398028702723446`*^9, 3.5398029727962084`*^9}, {3.539803005635087*^9, 
+   3.539803025422219*^9}, {3.539803215824109*^9, 3.539803234466175*^9}, 
+   3.5398032749274893`*^9, {3.5398039316010494`*^9, 3.5398041150655427`*^9}, {
+   3.5398041876746955`*^9, 3.539804197786274*^9}, {3.5398042330992937`*^9, 
+   3.5398042493142214`*^9}, {3.539804293840768*^9, 3.5398042964539175`*^9}, {
+   3.5398043281747317`*^9, 3.539804469322805*^9}, {3.5398044994325275`*^9, 
+   3.539804626027768*^9}, {3.539805192091145*^9, 3.5398055931690855`*^9}, {
+   3.5398056268130093`*^9, 3.5398056905736566`*^9}, {3.539805724761612*^9, 
+   3.539805737856361*^9}, {3.5398628172827044`*^9, 3.539862820721901*^9}, 
+   3.5398746573186216`*^9, {3.539875296761196*^9, 3.539875330104103*^9}, {
+   3.540203478132618*^9, 3.540203546374521*^9}, {3.5402036041708264`*^9, 
+   3.540203634804579*^9}, {3.540203711880987*^9, 3.5402037366804056`*^9}, {
+   3.540204226045396*^9, 3.5402043630512323`*^9}, {3.540204409892911*^9, 
+   3.5402044476440706`*^9}, {3.540204479738906*^9, 3.540204559741482*^9}, {
+   3.5402046393020325`*^9, 3.5402047728456707`*^9}, {3.5402048416066036`*^9, 
+   3.5402049544980607`*^9}, {3.540204994939374*^9, 3.5402054158694496`*^9}, {
+   3.540205454621666*^9, 3.540205539221505*^9}, {3.540205595728737*^9, 
+   3.5402056500628448`*^9}, {3.5402060180078897`*^9, 3.5402060196259823`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  GraphicsComplexBox[{{0., 100.}, {0.125, 100.00874822078562`}, {0.25, 
+   100.96473931362817`}, {0.375, 102.03392281453557`}, {0.5, 
+   102.92456397187124`}, {0.625, 103.42829356672475`}, {0.75, 
+   103.43432229086946`}, {0.875, 102.93959039502289`}, {1., 
+   102.04828233768107`}}, {{{}, {}, 
+     {RGBColor[0, 0, 1], LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9}]}}, {
+     {RGBColor[0, 0, 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 2], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 3], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 4], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 5], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 6], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 7], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 8], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 9]}, {}}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 99.80000000000001},
+  PlotRange->{{0., 1.}, {99.80000000000001, 103.43432229086946`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{
+  3.5402054670383763`*^9, 3.5402055166062117`*^9, 3.5402056005670137`*^9, {
+   3.540205637847146*^9, 3.540205651224911*^9}, 3.540206025670328*^9}],
+
+Cell[BoxData["\<\"Forward Euler for population growth\"\>"], "Print",
+ CellChangeTimes->{
+  3.540205467017375*^9, 3.5402055165612087`*^9, 3.5402056005570135`*^9, {
+   3.540205637880148*^9, 3.5402056512439127`*^9}, 3.5402060256903296`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[
+  GraphicsComplexBox[{{0., 100.}, {0., 99.53404812103038}, {0.125, 
+   100.00874822078562`}, {0.25, 100.96473931362817`}, {0.375, 
+   102.03392281453557`}, {0.5, 102.92456397187124`}, {0.625, 
+   103.42829356672475`}, {0.75, 103.43432229086946`}, {0.875, 
+   102.93959039502289`}, {1., 102.04828233768107`}}, {{{}, {}, 
+     {RGBColor[0, 0, 1], LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}]}}, {
+     {RGBColor[0, 0, 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 2], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 3], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 4], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 5], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 6], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 7], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 8], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 9], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 10]}, {}}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 99.4},
+  PlotRange->{{0., 1.}, {99.4, 103.43432229086946`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{
+  3.5402054670383763`*^9, 3.5402055166062117`*^9, 3.5402056005670137`*^9, {
+   3.540205637847146*^9, 3.540205651224911*^9}, 3.5402060257243314`*^9}],
+
+Cell[BoxData["\<\"Runge-Kutta with p=4 for population growth\"\>"], "Print",
+ CellChangeTimes->{
+  3.540205467017375*^9, 3.5402055165612087`*^9, 3.5402056005570135`*^9, {
+   3.540205637880148*^9, 3.5402056512439127`*^9}, 3.5402060257383323`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[
+  GraphicsComplexBox[{{0., 100.}, {0., 99.1566499919706}, {0.125, 
+   100.02872684107369`}, {0.25, 101.21363384270482`}, {0.375, 
+   102.37886893523265`}, {0.5, 103.2580799718852}, {0.625, 
+   103.66771386844285`}, {0.75, 103.52615185146114`}, {0.875, 
+   102.86419639593986`}, {1., 101.82145158896599`}}, {{{}, {}, 
+     {RGBColor[0, 0, 1], LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}]}}, {
+     {RGBColor[0, 0, 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 2], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 3], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 4], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 5], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 6], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 7], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 8], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 9], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 10]}, {}}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 98.80000000000001},
+  PlotRange->{{0., 1.}, {98.80000000000001, 103.66771386844285`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{
+  3.5402054670383763`*^9, 3.5402055166062117`*^9, 3.5402056005670137`*^9, {
+   3.540205637847146*^9, 3.540205651224911*^9}, 3.5402060257423325`*^9}],
+
+Cell[BoxData["\<\"Runge-Kutta with p=5 for population growth\"\>"], "Print",
+ CellChangeTimes->{
+  3.540205467017375*^9, 3.5402055165612087`*^9, 3.5402056005570135`*^9, {
+   3.540205637880148*^9, 3.5402056512439127`*^9}, 3.5402060257573333`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[
+  GraphicsComplexBox[{{0., 0.}, {0., 0.37739812905978454`}, {0.125, 
+   0.019978620288071625`}, {0.25, 0.24889452907665088`}, {0.375, 
+   0.34494612069707387`}, {0.5, 0.3335160000139581}, {0.625, 
+   0.23942030171809847`}, {0.75, 0.0918295605916768}, {0.875, 
+   0.07539399908303324}, {1., 0.2268307487150878}}, {{{}, {}, 
+     {RGBColor[0, 0, 1], LineBox[{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}]}}, {
+     {RGBColor[0, 0, 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 1], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 2], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 3], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 4], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 5], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 6], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 7], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 8], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 9], InsetBox[
+       StyleBox["\<\"\[FilledCircle]\"\>",
+        StripOnInput->False,
+        FontSize->8.96], 10]}, {}}}],
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesOrigin->{0, 0},
+  PlotRange->{{0., 1.}, {0., 0.37739812905978454`}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{
+  3.5402054670383763`*^9, 3.5402055166062117`*^9, 3.5402056005670137`*^9, {
+   3.540205637847146*^9, 3.540205651224911*^9}, 3.5402060257603335`*^9}],
+
+Cell[BoxData["\<\"Runge-Kutta error at each time step with p=5 and p=4\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.540205467017375*^9, 3.5402055165612087`*^9, 3.5402056005570135`*^9, {
+   3.540205637880148*^9, 3.5402056512439127`*^9}, 3.5402060257783346`*^9}]
+}, Open  ]]
+},
+WindowSize->{870, 505},
+WindowMargins->{{Automatic, 11}, {9, Automatic}},
+FrontEndVersion->"8.0 for Microsoft Windows (64-bit) (October 6, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 13345, 341, 1122, "Input"],
+Cell[13927, 365, 1867, 46, 242, "Output"],
+Cell[15797, 413, 238, 3, 23, "Print"],
+Cell[16038, 418, 1984, 49, 242, "Output"],
+Cell[18025, 469, 245, 3, 23, "Print"],
+Cell[18273, 474, 2007, 49, 242, "Output"],
+Cell[20283, 525, 245, 3, 23, "Print"],
+Cell[20531, 530, 1983, 49, 240, "Output"],
+Cell[22517, 581, 257, 4, 23, "Print"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

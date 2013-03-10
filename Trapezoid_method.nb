@@ -1,0 +1,173 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      5225,        164]
+NotebookOptionsPosition[      4791,        144]
+NotebookOutlinePosition[      5134,        159]
+CellTagsIndexPosition[      5091,        156]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "A", ",", "i", ",", "x", ",", "\[CapitalDelta]x", ",", "y", ",", "j"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalDelta]x", "=", ".1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", 
+   RowBox[{"x", "*", 
+    SuperscriptBox["\[ExponentialE]", 
+     RowBox[{"-", "x"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"j", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"A", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   SubscriptBox["x", 
+    RowBox[{"i", "-", "1"}]], "=", "5."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{
+     SubscriptBox["x", 
+      RowBox[{"i", "-", "1"}]], "\[LessEqual]", "7."}], ",", 
+    "\[IndentingNewLine]", "\t", 
+    RowBox[{
+     RowBox[{
+      SubscriptBox["x", "i"], "=", 
+      RowBox[{
+       SubscriptBox["x", 
+        RowBox[{"i", "-", "1"}]], "+", "\[CapitalDelta]x"}]}], ";", 
+     "\[IndentingNewLine]", "\t", 
+     RowBox[{"A", "+=", 
+      RowBox[{
+       FractionBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"f", "[", 
+           SubscriptBox["x", "i"], "]"}], "+", 
+          RowBox[{"f", "[", 
+           SubscriptBox["x", 
+            RowBox[{"i", "-", "1"}]], "]"}]}], ")"}], "2"], "*", 
+       RowBox[{"(", 
+        RowBox[{
+         SubscriptBox["x", "i"], "-", 
+         SubscriptBox["x", 
+          RowBox[{"i", "-", "1"}]]}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+     "\t", 
+     RowBox[{
+      SubscriptBox["x", 
+       RowBox[{"i", "-", "1"}]], "=", 
+      SubscriptBox["x", "i"]}], ";", "\[IndentingNewLine]", "\t", 
+     RowBox[{"j", "++"}]}]}], "\[IndentingNewLine]", "\t", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"err", "=", 
+   FractionBox[
+    RowBox[{"Abs", "[", 
+     RowBox[{"A", "-", "y"}], "]"}], 
+    RowBox[{"j", "-", "1"}]]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<Area of f[x] using trapezoid method = \>\"", ",", "A"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y", "=", 
+   RowBox[{
+    SubsuperscriptBox["\[Integral]", "5.", "7."], 
+    RowBox[{
+     RowBox[{"f", "[", "x", "]"}], 
+     RowBox[{"\[DifferentialD]", "x"}]}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"\"\<Integral of f[x] from 5 to 7 = \>\"", ",", "y"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+  "\"\<Average absolute error for computed integral vs. trapezoid method is \
+\>\"", ",", "err"}], "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGCQBmIQXdj2Xvm0wCvHJxU56iDa8kWhNoju2alkB6IXKfzy
+BtGzKtP9QPR1sW/pIDr44eoOEM2luKwXRBcpHgLTD77ZTQLRvk8OgOlNbL4L
+QLTMFp7VIHqB8PnjIPoRu8htEG21w1XrPkh+WbcBiOa6/doERNcwidmC6E8z
+pEpCBF85ur6RLQPR306JNoPoOSckWkD0s8RXb0B09V6/tyC6e5LxllAgfcPK
+fCeIDgpovQii4z7OewCitW3cn4Lo301Nr0D0EqMwvWQgfWaXqj6I1rg3oxJE
+nzu4DkxbPL1q3gukGQIvWoLoufP0YkC0L68pmDbxeqPdD6RfTErUA9Er+v6a
+guhzu5nNQLRiU7UNiI6XK3cA0eePV14F0RK/j90A0R3zD90B0Xd2zLwHol1O
+ObwE8zf6gOmpsUrvQPRCLWMwDQDpD9E2
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Area of f[x] using trapezoid method = \"\>", 
+   "\[InvisibleSpace]", "0.033762596254171565`"}],
+  SequenceForm[
+  "Area of f[x] using trapezoid method = ", 0.033762596254171565`],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.498868585996519*^9, 3.4988685946970167`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Integral of f[x] from 5 to 7 = \"\>", "\[InvisibleSpace]", 
+   "0.03313262627007667`"}],
+  SequenceForm["Integral of f[x] from 5 to 7 = ", 0.03313262627007667],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.498868585996519*^9, 3.4988685947160177`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Average absolute error for computed integral vs. trapezoid \
+method is \"\>", "\[InvisibleSpace]", "0.000031498499204744845`"}],
+  SequenceForm[
+  "Average absolute error for computed integral vs. trapezoid method is ", 
+   0.000031498499204744845`],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.498868585996519*^9, 3.4988685947230177`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{607, 505},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 3134, 89, 475, "Input"],
+Cell[CellGroupData[{
+Cell[3726, 115, 327, 7, 23, "Print"],
+Cell[4056, 124, 307, 6, 23, "Print"],
+Cell[4366, 132, 397, 8, 43, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
